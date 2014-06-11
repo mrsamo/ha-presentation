@@ -1,0 +1,453 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>Аппаратное ускорение в жизни верстальщика</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=792, user-scalable=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body class="list">
+<header class="caption">
+    <h1>Fronttalks</h1>
+    <p>Аппаратное ускорение в жизни верстальщика</p>
+</header>
+
+<section class="slide shout">
+    <div style="text-align: center">
+        <h2 style="font-size: 370%">Аппаратное ускорение в жизни верстальщика</h2>
+        <div style="font-size: 150%"><span style="color:red">Я</span>ндекс</div>
+        <div style="margin:300px 0 0;">Завьялов Александр</div>
+    </div>
+</section>
+
+<section class="slide">
+    <div>
+        <h2>GPU. Начало</h2>
+        <ul>
+            <li>март 2011 года</li>
+            <li><b>Firefox 4+</b>, <b>IE 9+</b>, Chrome 8+, Safari 5.1+, Opera 12+</li>
+        </ul>
+        <img src="simpsons/1.png" style="margin:-30px 0 0 140px">
+    </div>
+</section>
+
+<section class="slide">
+    <style type="text/css">
+        td {
+            vertical-align: middle;
+            font-size: 60%;
+        }
+        th {
+            vertical-align: middle;
+            font-size: 80%;
+        }
+    </style>
+    <div>
+        <h2>GPU. Сегодня</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Браузер</th>
+                <th>Проверка</th>
+                <th>Отключение</th>
+                <th style="text-align:center">По умолчанию</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>Firefox</th>
+                <td>about:support (graphics section)</td>
+                <td>about:config, settings</td>
+                <td style="text-align:center">вкл.*</td>
+            </tr>
+            <tr>
+                <th>Chrome</th>
+                <td>chrome://gpu</td>
+                <td>cli options</td>
+                <td style="text-align:center">вкл.*</td>
+            </tr>
+            <tr>
+                <th>IE9+</th>
+                <td>-</td>
+                <td>tools > internet option</td>
+                <td style="text-align:center">вкл.*</td>
+            </tr>
+            <tr>
+                <th>Safari</th>
+                <td>-</td>
+                <td>menu -> debug<br>cli options</td>
+                <td style="text-align:center">вкл.*</td>
+            </tr>
+            <tr>
+                <th>Opera</th>
+                <td>opera:gpu</td>
+                <td>opera:config</td>
+                <td style="text-align:center">вкл.* (webkit)</td>
+            </tr>
+            </tbody>
+        </table>
+        <div>Мобильные: iOS6+, Android4+, Windows Phone 7 (IE9)</div>
+        <p style="font-size:70%"><b>*</b> - драйвер</p>
+
+    </div>
+</section>
+
+<section class="slide cover">
+    <div>
+        <img src="simpsons/2.png" alt=""/>
+    </div>
+</section>
+
+<section class="slide b-dom-1-slide">
+    <div>
+        <h2>От разметки к изображению</h2>
+        <div style="position:relative">
+            <pre class="b-html-code">
+                <code>&lt;!DOCTYPE html&gt;</code>
+                <code>&lt;html&gt;</code>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&lt;head&gt;</code>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Пиар самого себя&lt;/title&gt;</code>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta charset="utf-8"&gt;</code>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;link rel="stylesheet" href="main.css"&gt;</code>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/head&gt;</code>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&lt;body&gt;</code>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;section&gt;</code>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Всем привет!&lt;/h1&gt;</code>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;img src="i.jpg" alt="Я"&gt;</code>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Я занимаюсь фронтенд разработкой.&lt;/p&gt;</code>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;И это круто!&lt;/p&gt;</code>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/section&gt;</code>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;script src="main.js"&gt;&lt;/script&gt;</code>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/body&gt;</code>
+                <code>&lt;/html&gt;</code>
+            </pre>
+            <div class="next b-dom-tags">
+                <div class="b-dom-tag b-dom-tag_html">html</div>
+                <div class="b-dom-tag b-dom-tag_head">head</div>
+                <div class="b-dom-tag b-dom-tag_title">title</div>
+                <div class="b-dom-tag b-dom-tag_meta">meta</div>
+                <div class="b-dom-tag b-dom-tag_link">link</div>
+                <div class="b-dom-tag b-dom-tag_body">body</div>
+                <div class="b-dom-tag b-dom-tag_section">section</div>
+                <div class="b-dom-tag b-dom-tag_h1">h1</div>
+                <div class="b-dom-tag b-dom-tag_img">img</div>
+                <div class="b-dom-tag b-dom-tag_p_1">p</div>
+                <div class="b-dom-tag b-dom-tag_p_2">p</div>
+                <div class="b-dom-tag b-dom-tag_script">script</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="slide b-dom-2-slide">
+    <div>
+        <h2>DOM Tree</h2>
+        <div style="position:relative">
+            <pre class="b-html-code">
+                <code>&lt;!DOCTYPE html&gt;</code>
+                <code>&lt;html&gt;</code>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&lt;head&gt;</code>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Пиар самого себя&lt;/title&gt;</code>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta charset="utf-8"&gt;</code>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;link rel="stylesheet" href="main.css"&gt;</code>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/head&gt;</code>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&lt;body&gt;</code>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;section&gt;</code>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Всем привет!&lt;/h1&gt;</code>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;img src="i.jpg" alt="Я"&gt;</code>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Я занимаюсь фронтенд разработкой.&lt;/p&gt;</code>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;И это круто!&lt;/p&gt;</code>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/section&gt;</code>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;script src="main.js"&gt;&lt;/script&gt;</code>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/body&gt;</code>
+                <code>&lt;/html&gt;</code>
+            </pre>
+            <img src="pictures/dom-lines.png" class="b-dom-lines">
+            <div class="b-dom-tags">
+                <div class="b-dom-tag b-dom-tag_html">html</div>
+                <div class="b-dom-tag b-dom-tag_head">head</div>
+                <div class="b-dom-tag b-dom-tag_title">title</div>
+                <div class="b-dom-tag b-dom-tag_meta">meta</div>
+                <div class="b-dom-tag b-dom-tag_link">link</div>
+                <div class="b-dom-tag b-dom-tag_body">body</div>
+                <div class="b-dom-tag b-dom-tag_section">section</div>
+                <div class="b-dom-tag b-dom-tag_h1">h1</div>
+                <div class="b-dom-tag b-dom-tag_img">img</div>
+                <div class="b-dom-tag b-dom-tag_p_1">p</div>
+                <div class="b-dom-tag b-dom-tag_p_2">p</div>
+                <div class="b-dom-tag b-dom-tag_script">script</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="slide b-dom-3-slide">
+    <div>
+        <h2>DOM Tree + CSS</h2>
+        <div style="position:relative">
+            <img src="pictures/dom-lines.png" class="b-dom-lines">
+            <div class="b-css next">CSS</div>
+            <div class="b-dom">DOM</div>
+            <div class="b-dom-tags">
+                <div class="b-dom-tag b-dom-tag_html">html</div>
+                <div class="b-dom-tag b-dom-tag_head">head</div>
+                <div class="b-dom-tag b-dom-tag_title">title</div>
+                <div class="b-dom-tag b-dom-tag_meta">meta</div>
+                <div class="b-dom-tag b-dom-tag_link">link</div>
+                <div class="b-dom-tag b-dom-tag_body">body</div>
+                <div class="b-dom-tag b-dom-tag_section">section</div>
+                <div class="b-dom-tag b-dom-tag_h1">h1</div>
+                <div class="b-dom-tag b-dom-tag_img">img</div>
+                <div class="b-dom-tag b-dom-tag_p_1">p</div>
+                <div class="b-dom-tag b-dom-tag_p_2">p</div>
+                <div class="b-dom-tag b-dom-tag_script">script</div>
+            </div>
+            <div class="b-dom-css-plus">+</div>
+        </div>
+    </div>
+</section>
+
+<section class="slide b-render-slide">
+    <div>
+        <h2>RenderTree</h2>
+        <div style="position:relative">
+            <div class="b-render-tags next">
+                <div class="b-render-tag b-render-tag_html">html</div>
+                <div class="b-render-tag b-render-tag_body">body</div>
+                <div class="b-render-tag b-render-tag_section">section</div>
+                <div class="b-render-tag b-render-tag_h1">h1</div>
+                <div class="b-render-tag b-render-tag_img">img</div>
+                <div class="b-render-tag b-render-tag_p_1">p</div>
+                <div class="b-render-tag b-render-tag_p_2">p</div>
+            </div>
+            <img src="pictures/render-lines.png" class="b-render-lines">
+            <div class="b-dom">DOM</div>
+            <div class="b-dom-css-plus">+</div>
+            <div class="b-css">CSS</div>
+            <div class="b-render-tree">RenderTree</div>
+        </div>
+    </div>
+</section>
+
+<section class="slide b-layout-slide">
+    <div>
+        <h2>Компоновка</h2>
+        <div style="position:relative">
+            <div class="b-render-tags">
+                <div class="b-render-tag b-render-tag_html">html</div>
+                <div class="b-render-tag b-render-tag_body">body</div>
+                <div class="b-render-tag b-render-tag_section">section</div>
+                <div class="b-render-tag b-render-tag_h1">h1</div>
+                <div class="b-render-tag b-render-tag_img">img</div>
+                <div class="b-render-tag b-render-tag_p_1">p</div>
+                <div class="b-render-tag b-render-tag_p_2">p</div>
+            </div>
+            <img src="pictures/render-lines.png" class="b-render-lines">
+            <div class="b-layout">
+                <div class="b-layout-body">html, body
+                    <div class="b-layout-section">section
+                        <div class="b-layout-h1">h1</div>
+                        <div class="b-layout-img">img</div>
+                        <div class="b-layout-p">p</div>
+                        <div class="b-layout-p">p</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="slide b-rasterization-slide">
+    <div>
+        <h2>Отрисовка</h2>
+        <img src="pictures/__8.png">
+    </div>
+</section>
+
+<section class="slide">
+    <div>
+        <h2>Отрисовка</h2>
+       <p><i>chrome:://tracing</i></p>
+    </div>
+</section>
+
+<section class="slide">
+    <div>
+        <h2>«Грязные» области</h2>
+        <img src="pictures/__10.jpg">
+    </div>
+</section>
+
+<section class="slide">
+    <div>
+        <h2>Итак:</h2>
+        <ol>
+            <li class="next">Парсим html</li>
+            <li class="next">Парсим css</li>
+            <li class="next">DOM Tree</li>
+            <li class="next">RenderTree</li>
+            <li class="next">Layout</li>
+            <li class="next">Paint (вся страница = 1 bitmap)</li>
+        </ol>
+    </div>
+</section>
+
+<section class="slide">
+    <div>
+        <h2>Слои</h2>
+        <div>./Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary</div>
+        <div style="font-size:80%">
+            <div>--enable-threaded-compositing</div>
+            <div>--force-compositing-mode</div>
+            <div>--enable-impl-side-painting</div>
+            <div>--enable-skia-benchmarking</div>
+            <div>--allow-webui-compositing</div>
+        </div>
+    </div>
+</section>
+
+<section class="slide">
+    <div>
+        <h2>Слои</h2>
+        <span><strong>Условия</strong> создания слоя:</span>
+        <ul style="font-size:80%">
+            <li class="next">3D transform (go fast hack)</li>
+            <li class="next">&lt;video&gt; с включенным h/a</li>
+            <li class="next">&lt;canvas&gt; с 3D или 2D с включенным h/a</li>
+            <li class="next">плагины (flash, silverlight)</li>
+            <li class="next">css анимации opacity или transform</li>
+            <li class="next">css фильтры</li>
+            <li class="next">пересекающиеся слои-соседи</li>
+        </ul>
+    </div>
+</section>
+
+<section class="slide">
+    <div>
+        <h2>GPU acceleration rendering</h2>
+        <ol>
+            <li class="next">страница делится на слои</li>
+            <li class="next">слои растеризуются в текстуры</li>
+            <li class="next">текстуры загружаются в GPU</li>
+            <li class="next">compositor инструктирует GPU, как собрать конечное изображение</li>
+        </ol>
+        <img class="next" src="pictures/14.png" style="margin:-47px 0 0 150px">
+    </div>
+</section>
+
+<section class="slide">
+    <div>
+        <h2>GPU acceleration rendering</h2>
+        <img src="pictures/_10.png" style="margin-left:-60px">
+    </div>
+</section>
+
+<section class="slide">
+    <div>
+        <h2>CPU rendering</h2>
+        <img src="pictures/_8.png" style="margin-left:-60px">
+    </div>
+</section>
+
+<section class="slide">
+    <div>
+        <h2>Ммм... слои - ням</h2>
+        <ul>
+            <li>1 слой = 1 bitmap</li>
+            <li>если слой стал "грязным":</li>
+            <ol>
+                <li><stroke>нет пересчета стилей</stroke></li>
+                <li><stroke>нет отрисовок</stroke></li>
+            </ol>
+            <img src="simpsons/6.jpg" style="margin: -169px 0 0 384px">
+        </ul>
+    </div>
+</section>
+
+<section class="slide">
+    <div>
+        <h2>GPU acceleration rendering</h2>
+        <p><i>Пример с выезжающим меню (css animation)</i></p>
+        <ul>
+            <li>left (постоянные отрисовки)</li>
+            <li>+ translate (2 отрисовки)</li>
+            <li>+ translate3d (0 отрисовок)</li>
+        </ul>
+        <p>Больше примеров!</p>
+    </div>
+</section>
+
+<section class="slide cover">
+    <div>
+        <h2>Успех!</h2>
+        <img src="simpsons/4.gif" width="100%">
+    </div>
+</section>
+
+<section class="slide">
+    <div>
+        <h2>Помним</h2>
+        <ul>
+            <li class="next"><strong>Память:</strong> узкое место на мобильных</li>
+            <li class="next"><strong>Скорость:</strong> CPU лучше работает с дорогими мат.операциями</li>
+            <li class="next"><strong>Пропускная способность:</strong> легко забить шину CPU <-> GPU</li>
+        </ul>
+        <img src="simpsons/7.jpg" class="next" style="margin:-40px 0 0 242px">
+        <img src="simpsons/8.jpg" class="next" style="left:-120px;position: relative; top: -251px;">
+    </div>
+</section>
+
+<section class="slide">
+    <div>
+        <h2>Дружелюбные CSS для анимаций</h2>
+        <ul>
+            <li class="next">opacity</li>
+            <li class="next">transform</li>
+            <li class="next">filter</li>
+        </ul>
+        <p class="next">Все остальные могут вызвать обновление текстур</p>
+    </div>
+</section>
+
+<section class="slide">
+    <div>
+        <h2>СОВЕТЫ</h2>
+        <ul>
+            <li class="next">Относитесь к GPU как к кэшу</li>
+            <li class="next">Подготавливайте все текстуры заранее и переиспользуйте имеющиеся</li>
+            <li class="next">Для изменения цвета используйте трюк с opacity</li>
+        </ul>
+    </div>
+</section>
+
+<section class="slide cover">
+    <div>
+        <h2>ПОДВОДНЫЕ КАМНИ</h2>
+        <ul>
+            <li class="next">border-radius 50% и overflow:hidden у родителя <strong class="next">(z-index родителю)</strong></li>
+            <li class="next">border-radius 50% + scale < 0.2 - артефакты <strong class="next">(анимация на absolute)</strong></li>
+            <li class="next">проблемы с ресайзом SVG в композитном слое в safari <strong class="next">(отказ от слоя)</strong></li>
+        </ul>
+    </div>
+</section>
+
+<section class="slide cover">
+    <div>
+        <h2 style="text-align: center; color: #fff;">СПАСИБО!</h2>
+        <p style="text-align: center; color: #fff;">Twitter:
+            <a href="https://twitter.com/HankyZavyalov" style="color: #fff">HankyZavyalov</a>
+        </p>
+        <img src="simpsons/5.gif" width="100%">
+    </div>
+</section>
+<div class="progress">
+    <div></div>
+</div>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/attrchange.js"></script>
+<script src="js/main.js"></script>
+<script src="shower/shower.min.js"></script>
+</body>
+</html>
