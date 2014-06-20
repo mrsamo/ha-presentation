@@ -24,90 +24,30 @@
 
 <section class="slide">
     <div>
-        <h2>Кадры</h2>
+        <h2>FPS</h2>
         <ul>
             <li>Средняя частота обновления 50...60 Hz</li>
             <li>RequestAnimationFrame() вместо setTimeout()</li>
+            <li>Новый кадр каждые ~16.6ms</li>
         </ul>
-        <img src="pictures/monitors.jpg" style="margin:0">
+        <img src="pictures/monitors.jpg" style="margin:-90px 0 0 510px;width: 440px;">
     </div>
 </section>
 
 <section class="slide">
     <div>
-        <h2>GPU. Начало</h2>
+        <h2>Chrome Timeline</h2>
         <ul>
-            <li>март 2011 года</li>
-            <li><b>Firefox 4+</b>, <b>IE 9+</b>, Chrome 8+, Safari 5.1+, Opera 12+</li>
+            <li>Мы - виртуозы создания помех</li>
         </ul>
-        <img src="simpsons/1.png" style="margin:-30px 0 0 140px">
+        <img src="pictures/jank.png" style="margin: -20px 0 0 -90px;">
     </div>
 </section>
 
-<section class="slide">
-    <style type="text/css">
-        td {
-            vertical-align: middle;
-            font-size: 60%;
-        }
-        th {
-            vertical-align: middle;
-            font-size: 80%;
-        }
-    </style>
+<section class="slide b-dom-1-slide">
     <div>
-        <h2>GPU. Сегодня</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>Браузер</th>
-                <th>Проверка</th>
-                <th>Отключение</th>
-                <th style="text-align:center">По умолчанию</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th>Firefox</th>
-                <td>about:support (graphics section)</td>
-                <td>about:config, settings</td>
-                <td style="text-align:center">вкл.*</td>
-            </tr>
-            <tr>
-                <th>Chrome</th>
-                <td>chrome://gpu</td>
-                <td>cli options</td>
-                <td style="text-align:center">вкл.*</td>
-            </tr>
-            <tr>
-                <th>IE9+</th>
-                <td>-</td>
-                <td>tools > internet option</td>
-                <td style="text-align:center">вкл.*</td>
-            </tr>
-            <tr>
-                <th>Safari</th>
-                <td>-</td>
-                <td>menu -> debug<br>cli options</td>
-                <td style="text-align:center">вкл.*</td>
-            </tr>
-            <tr>
-                <th>Opera</th>
-                <td>opera:gpu</td>
-                <td>opera:config</td>
-                <td style="text-align:center">вкл.* (webkit)</td>
-            </tr>
-            </tbody>
-        </table>
-        <div>Мобильные: iOS6+, Android4+, Windows Phone 7 (IE9)</div>
-        <p style="font-size:70%"><b>*</b> - драйвер</p>
-
-    </div>
-</section>
-
-<section class="slide cover">
-    <div>
-        <img src="simpsons/2.png" alt=""/>
+        <h2>От разметки к изображению</h2>
+        <img src="pictures/piar.png" alt=""/>
     </div>
 </section>
 
@@ -281,33 +221,136 @@
     <div>
         <h2>Отрисовка</h2>
        <p><i>chrome:://tracing</i></p>
+        <p style="color:green">вставлю сюда видео или че-нить такое, чтобы не переключаться</p>
     </div>
 </section>
 
 <section class="slide">
     <div>
-        <h2>«Грязные» области</h2>
-        <img src="pictures/10.jpg">
-    </div>
-</section>
-
-<section class="slide">
-    <div>
-        <h2>Итак:</h2>
+        <h2>Все вместе</h2>
         <ol>
-            <li class="next">Парсим html</li>
-            <li class="next">Парсим css</li>
+            <li class="next">Parsing html</li>
+            <li class="next">Parsing css</li>
             <li class="next">DOM Tree</li>
             <li class="next">RenderTree</li>
             <li class="next">Layout</li>
-            <li class="next">Paint (вся страница = 1 bitmap)</li>
+            <li class="next" style="font-weight:bold">Paint (one page = one bitmap)</li>
+        </ol>
+    </div>
+</section>
+
+<section class="slide cover">
+    <div>
+        <h2 style="color:#fff">Быстрая отрисовка</h2>
+        <img src="pictures/paint-fast.jpg" style="width:150%;" alt=""/>
+        <ol>
+            <li style="font-weight:bold">Используйте GPU!</li>
+            <li>Избегайте случайных отрисовок</li>
+            <li>Не рисуйте все</li>
         </ol>
     </div>
 </section>
 
 <section class="slide">
     <div>
-        <h2>Слои</h2>
+        <h2>Оптимизированный скролл</h2>
+        <img src="pictures/scroll.png" style="margin:0 0 0 300px;width:240px;" alt=""/>
+    </div>
+</section>
+
+<section class="slide">
+    <div>
+        <h2>Слой</h2>
+        <p>Слой (композитный слой) - часть страницы, поддерево DOM. Отрисовывается независимо, компонуется в GPU. Может растягиваться, перемещаться, скрываться (через прозрачность) без отрисовки.</p>
+    </div>
+</section>
+
+<section class="slide">
+    <div>
+        <h2>Выход в свет</h2>
+        <ul>
+            <li>март 2011 года</li>
+            <li><b>Firefox 4+</b>, IE 9+, Chrome 8+, Safari 5.1+, Opera 12+</li>
+        </ul>
+        <img src="simpsons/1.png" style="margin:-30px 0 0 140px">
+    </div>
+</section>
+
+<section class="slide">
+    <style type="text/css">
+        td {
+            vertical-align: middle;
+            font-size: 60%;
+        }
+        th {
+            vertical-align: middle;
+            font-size: 80%;
+        }
+    </style>
+    <div>
+        <h2>Современность</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Браузер</th>
+                <th>Проверка</th>
+                <th>Отключение</th>
+                <th style="text-align:center">По умолчанию</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>Firefox</th>
+                <td>about:support (graphics section)</td>
+                <td>about:config, settings</td>
+                <td style="text-align:center">вкл.*</td>
+            </tr>
+            <tr>
+                <th>Chrome</th>
+                <td>chrome://gpu</td>
+                <td>cli options</td>
+                <td style="text-align:center">вкл.*</td>
+            </tr>
+            <tr>
+                <th>IE9+</th>
+                <td>-</td>
+                <td>tools > internet option</td>
+                <td style="text-align:center">вкл.*</td>
+            </tr>
+            <tr>
+                <th>Safari</th>
+                <td>-</td>
+                <td>menu -> debug<br>cli options</td>
+                <td style="text-align:center">вкл.*</td>
+            </tr>
+            <tr>
+                <th>Opera</th>
+                <td>opera:gpu</td>
+                <td>opera:config</td>
+                <td style="text-align:center">вкл.* (webkit)</td>
+            </tr>
+            </tbody>
+        </table>
+        <div>Мобильные: iOS6+, Android4+, Windows Phone 7 (IE9)</div>
+        <p style="font-size:70%"><b>*</b> - драйвер</p>
+
+    </div>
+</section>
+
+<section class="slide">
+    <div>
+        <h2>Дебаг</h2>
+        <ul>
+            <li>Desktop webkit: Show composited layer borders</li>
+            <li>Mobile Android, Safari: XCode, USB, Thunderbolt (?)</li>
+        </ul>
+        <p><sup>*</sup> <a href="http://www.chromium.org/developers/how-tos/trace-event-profiling-tool">http://www.chromium.org/developers/how-tos/trace-event-profiling-tool</a></p>
+    </div>
+</section>
+
+<section class="slide">
+    <div>
+        <h2>Красивый дебаг</h2>
         <div>./Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary</div>
         <div style="font-size:80%">
             <div>--enable-threaded-compositing</div>
@@ -316,6 +359,13 @@
             <div>--enable-skia-benchmarking</div>
             <div>--allow-webui-compositing</div>
         </div>
+    </div>
+</section>
+
+<section class="slide">
+    <div>
+        <h2>Отрисовка</h2>
+        <p><i>chrome:://tracing</i></p>
     </div>
 </section>
 
@@ -330,7 +380,7 @@
             <li class="next">плагины (flash, silverlight)</li>
             <li class="next">css анимации opacity или transform</li>
             <li class="next">css фильтры</li>
-            <li class="next">пересекающиеся слои-соседи</li>
+            <li class="next">элементы, вынесенные над композитным слоем</li>
         </ul>
     </div>
 </section>
