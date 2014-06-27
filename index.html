@@ -18,8 +18,14 @@
     <div style="text-align: center">
         <h2 style="font-size: 370%">Аппаратное ускорение в жизни верстальщика</h2>
         <div style="font-size: 150%"><span style="color:red">Я</span>ндекс</div>
-        <div style="margin:300px 0 0;">Завьялов Александр</div>
+        <div style="margin:300px 0 0;"><span style="color:red">З</span>авьялов <span style="color:red">А</span>лександр
+        </div>
     </div>
+</section>
+
+<section class="slide cover">
+    <h2 class="b-demo-head">Demo</h2>
+    <video src="video/demo.webm" controls="controls" width="100%"></video>
 </section>
 
 <section class="slide">
@@ -44,9 +50,17 @@
     </div>
 </section>
 
+<section class="slide cover">
+    <div>
+        <h2 style="color:#fff;display:inline-block;text-shadow: 0 0 16px #000;">От разметки к изображению</h2>
+        <span style="color:#fff;text-shadow: 0 0 16px #000;"> (как это было)</span>
+        <img src="simpsons/render-past.jpg" style="" alt=""/>
+    </div>
+</section>
+
 <section class="slide b-dom-1-slide">
     <div>
-        <h2>От разметки к изображению</h2>
+        <h2>Лучшая в мире страничка</h2>
         <img src="pictures/piar.png" alt=""/>
     </div>
 </section>
@@ -178,6 +192,17 @@
             <div class="b-dom-css-plus">+</div>
             <div class="b-css">CSS</div>
             <div class="b-render-tree">RenderTree</div>
+            <code class="next render-tree-change">
+                p::after {<br>
+                &nbsp;&nbsp;...<br>
+                }
+            </code>
+            <div class="next">
+                <div class="b-render-extra-line b-render-extra-line_1"></div>
+                <div class="b-render-extra-line b-render-extra-line_2"></div>
+                <div class="b-render-tag b-render-tag_p_1_after">::after</div>
+                <div class="b-render-tag b-render-tag_p_2_after">::after</div>
+            </div>
         </div>
     </div>
 </section>
@@ -217,57 +242,83 @@
     </div>
 </section>
 
+<section class="slide cover">
+    <h2 class="b-rasterization-head">Отрисовка</h2>
+    <video src="video/rasterization.webm" controls="controls" width="100%"></video>
+</section>
+
 <section class="slide">
     <div>
-        <h2>Отрисовка</h2>
-       <p><i>chrome:://tracing</i></p>
-        <p style="color:green">вставлю сюда видео или че-нить такое, чтобы не переключаться</p>
+        <h2>Отрисовка. «Грязные» области</h2>
+        <img src="pictures/10.jpg">
     </div>
 </section>
 
 <section class="slide">
     <div>
-        <h2>Все вместе</h2>
+        <h2>Весь процесс</h2>
         <ol>
-            <li class="next">Parsing html</li>
-            <li class="next">Parsing css</li>
+            <li class="next">Парсинг HTML</li>
+            <li class="next">Парсинг CSS</li>
             <li class="next">DOM Tree</li>
             <li class="next">RenderTree</li>
-            <li class="next">Layout</li>
-            <li class="next" style="font-weight:bold">Paint (one page = one bitmap)</li>
+            <li class="next">Компоновка</li>
+            <li class="next" style="font-weight:bold">Отрисовка (страница = растровое изображение)</li>
         </ol>
+        <p class="next"><a href="http://www.html5rocks.com/ru/tutorials/internals/howbrowserswork/">Как работают
+            браузеры</a></p>
+    </div>
+</section>
+
+<section class="slide">
+    <div>
+        <h2>Отрисовка</h2>
+        <img src="pictures/9.png">
+    </div>
+</section>
+
+<section class="slide">
+    <div>
+        <h2>Скролл</h2>
+        <img src="pictures/scroll-cpu.png" style="margin:-24px 0 0 170px;width:490px;" alt=""/>
     </div>
 </section>
 
 <section class="slide cover">
     <div>
-        <h2 style="color:#fff">Быстрая отрисовка</h2>
-        <img src="pictures/paint-fast.jpg" style="width:150%;" alt=""/>
+        <h2 style="color:#fff;display:inline-block;">Compositing</h2><br>
+        <img src="simpsons/compositing.jpg" style="width:105%" alt=""/>
+    </div>
+</section>
+
+<section class="slide">
+    <div>
+        <h2>Compositing</h2>
         <ol>
-            <li style="font-weight:bold">Используйте GPU!</li>
-            <li>Избегайте случайных отрисовок</li>
-            <li>Не рисуйте все</li>
+            <li class="next">страница делится на слои</li>
+            <li class="next">слои растеризуются</li>
+            <li class="next">слои выводятся на экран *</li>
+
+            <p class="next">* X Window, Windows API, что есть в ОС</p>
         </ol>
     </div>
 </section>
 
-<section class="slide">
+<section class="slide cover">
+    <h2 class="b-rasterization-head">Оптимизированный скролл</h2>
+    <video src="video/scroll.webm" controls="controls" width="100%"></video>
+</section>
+
+<section class="slide cover">
     <div>
-        <h2>Оптимизированный скролл</h2>
-        <img src="pictures/scroll.png" style="margin:0 0 0 300px;width:240px;" alt=""/>
+        <h2 style="color:#fff;display:inline-block;">GPU Accelerated Compositing</h2>
+        <img src="simpsons/gpu-compositing.jpg" style="" alt=""/>
     </div>
 </section>
 
 <section class="slide">
     <div>
-        <h2>Слой</h2>
-        <p>Слой (композитный слой) - часть страницы, поддерево DOM. Отрисовывается независимо, компонуется в GPU. Может растягиваться, перемещаться, скрываться (через прозрачность) без отрисовки.</p>
-    </div>
-</section>
-
-<section class="slide">
-    <div>
-        <h2>Выход в свет</h2>
+        <h2>GPU Accelerated Compositing. Вчера.</h2>
         <ul>
             <li>март 2011 года</li>
             <li><b>Firefox 4+</b>, IE 9+, Chrome 8+, Safari 5.1+, Opera 12+</li>
@@ -278,17 +329,20 @@
 
 <section class="slide">
     <style type="text/css">
-        td {
+        td
+        {
             vertical-align: middle;
             font-size: 60%;
         }
-        th {
+
+        th
+        {
             vertical-align: middle;
             font-size: 80%;
         }
     </style>
     <div>
-        <h2>Современность</h2>
+        <h2>GPU Accelerated Compositing. Сегодня.</h2>
         <table>
             <thead>
             <tr>
@@ -339,33 +393,33 @@
 
 <section class="slide">
     <div>
-        <h2>Дебаг</h2>
-        <ul>
-            <li>Desktop webkit: Show composited layer borders</li>
-            <li>Mobile Android, Safari: XCode, USB, Thunderbolt (?)</li>
-        </ul>
-        <p><sup>*</sup> <a href="http://www.chromium.org/developers/how-tos/trace-event-profiling-tool">http://www.chromium.org/developers/how-tos/trace-event-profiling-tool</a></p>
+        <h2>GPU Accelerated Compositing</h2>
+        <ol>
+            <li class="next">страница делится на слои</li>
+            <li class="next">слои растеризуются в текстуры</li>
+            <li class="next">текстуры загружаются в GPU</li>
+            <li class="next"><i>compositor</i> инструктирует GPU, как собрать конечное изображение</li>
+        </ol>
+        <img class="next" src="pictures/14.png" style="margin:-47px 0 0 150px">
     </div>
 </section>
 
 <section class="slide">
     <div>
-        <h2>Красивый дебаг</h2>
-        <div>./Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary</div>
-        <div style="font-size:80%">
-            <div>--enable-threaded-compositing</div>
-            <div>--force-compositing-mode</div>
-            <div>--enable-impl-side-painting</div>
-            <div>--enable-skia-benchmarking</div>
-            <div>--allow-webui-compositing</div>
-        </div>
+        <h2>GPU Accelerated Compositing</h2>
+        <img src="pictures/10.png" style="margin-left:-60px">
+        <p><a href="http://www.chromium.org/developers/design-documents/gpu-accelerated-compositing-in-chrome">GPU
+            Accelerated Compositing in Chrome</a></p>
     </div>
 </section>
 
 <section class="slide">
     <div>
-        <h2>Отрисовка</h2>
-        <p><i>chrome:://tracing</i></p>
+        <h2>Слои</h2>
+        <p>Слой (композитный слой) - часть страницы, поддерево DOM. <b>Отрисовывается независимо</b>, <b>компонуется в
+            GPU</b>. Может
+            растягиваться, перемещаться, скрываться (через прозрачность) <b>без отрисовки</b>.</p>
+        <p>Paint - дорого<br>Composite - дешево</p>
     </div>
 </section>
 
@@ -387,82 +441,36 @@
 
 <section class="slide">
     <div>
-        <h2>GPU acceleration rendering</h2>
-        <ol>
-            <li class="next">страница делится на слои</li>
-            <li class="next">слои растеризуются в текстуры</li>
-            <li class="next">текстуры загружаются в GPU</li>
-            <li class="next">compositor инструктирует GPU, как собрать конечное изображение</li>
-        </ol>
-        <img class="next" src="pictures/14.png" style="margin:-47px 0 0 150px">
-    </div>
-</section>
-
-<section class="slide">
-    <div>
-        <h2>GPU acceleration rendering</h2>
-        <img src="pictures/10.png" style="margin-left:-60px">
-    </div>
-</section>
-
-<section class="slide">
-    <div>
-        <h2>CPU rendering</h2>
-        <img src="pictures/9.png" style="margin-left:-60px">
-    </div>
-</section>
-
-<section class="slide">
-    <div>
-        <h2>Ммм... слои - ням</h2>
+        <h2>Дебаг</h2>
         <ul>
-            <li>1 слой = 1 bitmap</li>
-            <li>если слой стал "грязным":</li>
-            <ol>
-                <li><stroke>нет пересчета стилей</stroke></li>
-                <li><stroke>нет отрисовок</stroke></li>
-            </ol>
-            <img src="simpsons/6.jpg" style="margin: -169px 0 0 384px">
+            <li>Desktop Webkit: Show composited layer borders</li>
+            <li>iOS: XCode, connect to Mac</li>
+            <li>Android: connect to PC</li>
         </ul>
-    </div>
-</section>
-
-<section class="slide">
-    <div>
-        <h2>GPU acceleration rendering</h2>
-        <p><i>Пример с выезжающим меню (css animation)</i></p>
-        <ul>
-            <li>left (постоянные отрисовки)</li>
-            <li>+ translate (2 отрисовки)</li>
-            <li>+ translate3d (0 отрисовок)</li>
-        </ul>
-        <p>Больше примеров!</p>
+        <p><a href="http://www.chromium.org/developers/how-tos/trace-event-profiling-tool">Trace Event Profiling Tool
+            (about:tracing)</a>
+        </p>
     </div>
 </section>
 
 <section class="slide cover">
     <div>
-        <h2>Успех!</h2>
-        <img src="simpsons/4.gif" width="100%">
+        <h2>Дебаг для взрослых</h2>
+        <img src="simpsons/tracing.jpg" style="width:136%;margin-left:-180px;" alt=""/>
+        <div>./Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary</div>
+        <div style="font-size:80%">
+            <div>--enable-threaded-compositing</div>
+            <div>--force-compositing-mode</div>
+            <div>--enable-impl-side-painting</div>
+            <div>--enable-skia-benchmarking</div>
+            <div>--allow-webui-compositing</div>
+        </div>
     </div>
 </section>
 
 <section class="slide">
     <div>
-        <h2>Помним</h2>
-        <ul>
-            <li class="next"><strong>Память:</strong> узкое место на мобильных</li>
-            <li class="next"><strong>Скорость:</strong> CPU лучше работает с дорогими мат.операциями</li>
-            <li class="next"><strong>Пропускная способность:</strong> легко забить шину CPU <-> GPU</li>
-        </ul>
-        <img src="simpsons/7.jpg" class="next" style="margin:-40px 0 0 242px">
-        <img src="simpsons/8.jpg" class="next" style="left:-120px;position: relative; top: -251px;">
-    </div>
-</section>
-
-<section class="slide">
-    <div>
-        <h2>Дружелюбные CSS для анимаций</h2>
+        <h2>Слои для анимаций. Дружелюбный CSS.</h2>
         <ul>
             <li class="next">opacity</li>
             <li class="next">transform</li>
@@ -474,22 +482,73 @@
 
 <section class="slide">
     <div>
-        <h2>СОВЕТЫ</h2>
+        <h2>Слои для анимаций</h2>
+        <p><i>Пример с выезжающим меню (CSS animation)</i></p>
         <ul>
-            <li class="next">Относитесь к GPU как к кэшу</li>
-            <li class="next">Подготавливайте все текстуры заранее и переиспользуйте имеющиеся</li>
-            <li class="next">Для изменения цвета используйте трюк с opacity</li>
+            <li>left (постоянные перерисовки)</li>
+            <li>+ translate (2 перерисовки)</li>
+            <li>+ translate3d (0 перерисовок)</li>
+        </ul>
+        <p>Больше примеров!</p>
+    </div>
+</section>
+
+<section class="slide cover">
+    <div>
+        <h2>Успех!</h2>
+        <img src="simpsons/success.jpg" style="width:120%;margin-left:-100px">
+    </div>
+</section>
+
+<section class="slide">
+    <div>
+        <h2>Помним</h2>
+        <ul>
+            <li class="next"><strong>Память:</strong> узкое место на мобильных</li>
+            <li class="next"><strong>Пропускная способность:</strong> легко забить шину CPU <-> GPU</li>
         </ul>
     </div>
 </section>
 
 <section class="slide cover">
     <div>
-        <h2>ПОДВОДНЫЕ КАМНИ</h2>
+        <h2>Советы</h2>
+        <img src="pictures/paint-fast.jpg" style="width:151%;" alt=""/>
+        <ol>
+            <li class="next">Относитесь к GPU как к кэшу</li>
+            <li class="next">Подготавливайте текстуры заранее<br>(переиспользуйте имеющиеся)</li>
+            <li class="next">Не создавайте "лишних" слоев</li>
+            <li class="next">Для изменения цвета<br>используйте трюк<br>с opacity</li>
+        </ol>
+    </div>
+</section>
+
+<section class="slide cover">
+    <div>
+        <h2 style="color:#fff">Подводные камни</h2>
+        <img src="simpsons/remember.jpg" style="width:109%">
         <ul>
-            <li class="next">border-radius 50% и overflow:hidden у родителя <strong class="next">(z-index родителю)</strong></li>
-            <li class="next">border-radius 50% + scale < 0.2 - артефакты <strong class="next">(анимация на absolute)</strong></li>
-            <li class="next">проблемы с ресайзом SVG в композитном слое в safari <strong class="next">(отказ от слоя)</strong></li>
+            <li class="next" style="color:#fff">border-radius 50% и overflow:hidden у родителя <strong class="next">(z-index
+                родителю)</strong></li>
+            <li class="next" style="color:#fff">потеря антиалиасинга шрифта в композитном слое<br><strong class="next">(отказ
+                от композитного слоя, +font-size +shadow)</strong></li>
+            <li class="next" style="color:#fff">блур текста при трансформации <strong
+                    class="next">(background-color,<br>возможно, transform-origin: 50% 51%)</strong></li>
+            <li class="next" style="color:#fff">проблемый ресайз SVG в композитном слое в safari<br><strong
+                    class="next">(отказ от
+                слоя)</strong></li>
+        </ul>
+    </div>
+</section>
+
+<section class="slide">
+    <div>
+        <h2>Если стало интересно</h2>
+        <ul>
+            <li><a href="http://jankfree.org/">JankFree.org</a></li>
+            <li><a href="http://dev.opera.com/articles/css-will-change-property/">Everything You Need to Know About the
+                CSS will-change Property</a></li>
+            <li><a href="http://mrsamo.github.io/ha-presentation/index.html">Вот эта вот лекция</a></li>
         </ul>
     </div>
 </section>
@@ -498,7 +557,7 @@
     <div>
         <h2 style="text-align: center; color: #fff;">СПАСИБО!</h2>
         <p style="text-align: center; color: #fff;">Twitter:
-            <a href="https://twitter.com/HankyZavyalov" style="color: #fff">HankyZavyalov</a>
+            <a href="https://twitter.com/alzavyalov" style="color: #fff">alzavyalov</a>
         </p>
         <img src="simpsons/5.gif" width="100%">
     </div>
